@@ -1,0 +1,25 @@
+{
+  "name": "playwright-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:qa": "cross-env TEST_ENV=qa npx playwright test add-to-cart-json",
+    "test:qa:regression": "cross-env TEST_ENV=qa npx playwright test --grep '@reg'",
+    "test:staging": "cross-env TEST_ENV=staging npx playwright test add-to-cart",
+    "test:dev": "cross-env TEST_ENV=dev npx playwright test add-to-cart"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.3.0",
+    "allure-playwright": "^3.7.1",
+    "cross-env": "^10.1.0"
+  },
+  "dependencies": {
+    "csv-parse": "^6.2.1",
+    "dotenv": "^17.4.0"
+  }
+}
