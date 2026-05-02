@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:qa": "cross-env TEST_ENV=qa npx playwright test --grep '@basictests",
+    "test:qa": "cross-env TEST_ENV=qa npx playwright test --grep '@basictests'",
     "test:qa:regression": "cross-env TEST_ENV=qa npx playwright test --grep '@reg'",
     "test:staging": "cross-env TEST_ENV=staging npx playwright test add-to-cart",
     "test:dev": "cross-env TEST_ENV=dev npx playwright test add-to-cart"
