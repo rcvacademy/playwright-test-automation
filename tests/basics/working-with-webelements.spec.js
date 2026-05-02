@@ -40,7 +40,7 @@ test('@basictests Working with checkboxes', async ({ page }) => {
 
 })
 
-test('Working with select dropdown', async ({ page }) => {
+test('@basictests Working with select dropdown', async ({ page }) => {
     await page.goto('http://localhost:3000');
     await page.getByText('Register Page').first().click();
     const country_dropdown = page.locator("#country");
