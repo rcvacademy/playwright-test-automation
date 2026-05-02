@@ -9,32 +9,52 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout test application code
-        uses: actions/checkout@v4
-        with:
-          repository: rcvacademy/rcv-academy-automation-practice-app
-          path: practice-test-app
-      - name: Checkout test automation code
-        uses: actions/checkout@v4
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - name: Install dependencies in machine
-        run: npm ci
+
+      # 1. Download App Code into 'test-app' folder
+      - name: Checkout test application code
+        uses: actions/checkout@v4
+        with:
+          repository: rcvacademy/rcv-academy-automation-practice-app
+          path: test-app
+
+      # 2. Download Automation Code into 'automation' folder
+      - name: Checkout test automation code
+        uses: actions/checkout@v4
+        with:
+          path: automation
+
+      # 3. Install and Start the App (Background)
       - name: Install and start test application
-        working-directory: practice-test-app
+        working-directory: test-app
         run: |
           npm install
           npm start &
-          sleep 10
+          # This ensures the app is actually up before moving to tests
+          npx wait-on http://localhost:3000 
+
+      # 4. Install Automation Dependencies
+      - name: Install automation dependencies
+        working-directory: automation
+        run: npm ci
+
+      # 5. Install Playwright Browsers
       - name: Install Playwright Browsers
+        working-directory: automation
         run: npx playwright install --with-deps
+
+      # 6. Run Playwright tests
       - name: Run Playwright tests
+        working-directory: automation
         run: npm run test:qa
+
+      # 7. Upload Report
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
-          path: playwright-report/
+          path: automation/playwright-report/
           retention-days: 30
