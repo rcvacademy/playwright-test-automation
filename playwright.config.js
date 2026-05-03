@@ -15,9 +15,11 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   workers: 4,
+
   reporter: [
-    ['allure-playwright', {resultsDir: 'allure-rp'}], ['html', {outputFolder: 'reports'}],['json', {outputFile: 'reports/samplejsonreport.json'}],['dot'],['line'],['list']
+    ['allure-playwright', {resultsDir: 'allure-rp'}], ['html', {outputFolder: 'reports'}],['json', {outputFile: 'reports/samplejsonreport.json'}],['dot'],['line'],['github'],['list']
   ],
+  // reporter: process.env.CI ? 'github' : 'html',
   timeout: 30000,
   retries: 1,
   expect: {
