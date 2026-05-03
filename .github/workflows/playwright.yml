@@ -15,19 +15,19 @@ jobs:
           node-version: lts/*
 
       # 1. Download App Code into 'test-app' folder
-      - name: Checkout test application code
+      - name: Checkout Demo eCommerce test application code
         uses: actions/checkout@v4
         with:
           repository: rcvacademy/rcv-academy-automation-practice-app
           path: test-app
 
-      # 2. Download Automation Code into 'automation' folder
+      # 2. Download Test Automation Code into 'automation' folder
       - name: Checkout test automation code
         uses: actions/checkout@v4
         with:
           path: automation
 
-      # 3. Install and Start the App (Background)
+      # 3. Install and Start the test App (Background)
       - name: Install and start test application
         working-directory: test-app
         run: |
